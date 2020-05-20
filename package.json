@@ -1,0 +1,24 @@
+{
+  "name": "md-links",
+  "version": "1.0.0",
+  "description": "Crear una libreria para verificar links en archivos formato Markdown.",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/argierdfj/LIM012-fe-md-links.git"
+  },
+  "keywords": [
+    "javascript",
+    "node",
+    "package"
+  ],
+  "author": "Argie Rincon <argierincon@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/argierdfj/LIM012-fe-md-links/issues"
+  },
+  "homepage": "https://github.com/argierdfj/LIM012-fe-md-links#readme"
+}
