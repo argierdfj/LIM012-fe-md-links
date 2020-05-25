@@ -1,4 +1,4 @@
-export const mdlinks = (path, opts) => {
+export const mdlinks = (path, opts = {validate: false}) => {
   return [[]];
 }
 
