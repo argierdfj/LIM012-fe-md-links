@@ -4,7 +4,8 @@
   "description": "Crear una libreria para verificar links en archivos formato Markdown.",
   "main": "src/index.js",
   "scripts": {
-    "test": "jest --coverage"
+    "test": "jest --coverage",
+    "start": "node ./src/prueba.js"
   },
   "repository": {
     "type": "git",
