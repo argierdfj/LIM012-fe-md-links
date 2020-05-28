@@ -2,42 +2,45 @@ const axios = require('axios');
 const path = require('path');
 const fileSystem = require('fs');
 
-const mdlinks = async (filePath, opts = undefined) => {
-  return axios.get(filePath)
+const mdlinks = async (elemPath, opts = undefined) => {
+  return axios.get(elemPath)
   .then(({data}) => {
     return data;
-  });
+  })
+  .catch()
 }
 
-const relativeToAbsolute = (filePath) => {
-
-  // if (!path.isAbsolute(filePath)) {
-  //   return path.resolve(__dirname, filePath)
-  // }
-  // return filePath;
-  return path.resolve(__dirname, filePath)
+const relativeToAbsolute = (elemPath) => {
+  return path.resolve(__dirname, elemPath)
 }
 
-const validatePath = (filePath) => {
-  const directory = path.dirname(filePath);
-  const fileName = path.basename(filePath);
-  fileSystem.readdir(directory, (err, files) => {
-    if (files.includes(fileName)) {
-      console.log(files);
-      console.log('Archivo encontrado')
-    } else {
-      console.log('No se encontró archivo')
-    }
-    
-  });
-  return true;
+const validatePath = (elemPath) => {
+  const directoryName = path.dirname(elemPath);
+  const elemName = path.basename(elemPath);
+  const elemList = fileSystem.readdirSync(directoryName);
+
+  let foundElem = false;
+  if (elemList.includes(elemName)) {
+    console.log('Ruta válida');
+    foundElem = true
+  } else {
+    console.log('La ruta no es válida');
+  }
+
+  return foundElem;
 }
 
-const validateFolder = (route) => {
-  return true;
+const validateDirectory = (elemPath) => {
+  const extElem = path.extname(elemPath)
+  if (extElem == '') {
+    console.log('Es una carpeta');
+  } else {
+    console.log('No es una carpeta');
+  }
+  return extElem;
 }
 
-const validateFile = (route) => {
+const validateFile = (elemPath) => {
   return false;
 }
 
@@ -45,6 +48,6 @@ module.exports = {
   mdlinks,
   relativeToAbsolute,
   validatePath,
-  validateFolder,
+  validateDirectory,
   validateFile
 }

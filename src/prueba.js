@@ -1,10 +1,15 @@
 const md = require('./index.js');
-const path = '../src'
-const res = md.relativeToAbsolute(path)
-console.log('-'.repeat(res.length))
-console.log(res);
-console.log('-'.repeat(res.length))
-md.validatePath(res);
-setTimeout(() => {
-  console.log('-'.repeat(res.length));
-}, 2000) 
+const path = './cli.js'
+const absPath = md.relativeToAbsolute(path)
+
+console.log('-'.repeat(absPath.length))
+console.log(absPath);
+console.log('-'.repeat(absPath.length))
+
+console.log(md.validatePath(absPath));
+// setTimeout(() => {
+//   console.log('-'.repeat(absPath.length));
+// }, 2000)
+
+console.log(md.validateDirectory(absPath));
+
