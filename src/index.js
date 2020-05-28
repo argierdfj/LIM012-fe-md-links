@@ -1,8 +1,12 @@
+const axios = require('axios');
 const path = require('path');
 const fileSystem = require('fs');
 
-const mdlinks = (filePath, opts = {validate: false}) => {
-  return [[]];
+const mdlinks = async (filePath, opts = undefined) => {
+  return axios.get(filePath)
+  .then(({data}) => {
+    return data;
+  });
 }
 
 const relativeToAbsolute = (filePath) => {
@@ -18,7 +22,13 @@ const validatePath = (filePath) => {
   const directory = path.dirname(filePath);
   const fileName = path.basename(filePath);
   fileSystem.readdir(directory, (err, files) => {
-    console.log(files);
+    if (files.includes(fileName)) {
+      console.log(files);
+      console.log('Archivo encontrado')
+    } else {
+      console.log('No se encontró archivo')
+    }
+    
   });
   return true;
 }
