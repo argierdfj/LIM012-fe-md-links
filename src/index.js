@@ -10,10 +10,12 @@ const mdlinks = async (elemPath, opts = undefined) => {
   .catch()
 }
 
+//? ES RUTA ABSOLUTA?
 const relativeToAbsolute = (elemPath) => {
   return path.resolve(__dirname, elemPath)
 }
 
+//? ES RUTA VÁLIDA
 const validatePath = (elemPath) => {
   const directoryName = path.dirname(elemPath);
   const elemName = path.basename(elemPath);
@@ -30,14 +32,38 @@ const validatePath = (elemPath) => {
   return foundElem;
 }
 
-const validateDirectory = (elemPath) => {
+//? ¿ES UNA CARPETA?
+const validateElem = (elemPath, mdFiles = []) => {
+// para ver la extensión del elemento
   const extElem = path.extname(elemPath)
+
+  //* Si es una carpeta...
   if (extElem == '') {
     console.log('Es una carpeta');
+    const elemList = fileSystem.readdirSync(elemPath);
+
+    //? CONTIENE ELEMENTOS?
+    //* Si contiene elementos
+    if (elemList.length) {
+      console.log('Contiene elementos');
+
+      elemList.forEach((elem) => {
+        const absPath = relativeToAbsolute(elem)
+        validateElem(absPath, mdFiles)
+      });
+    } else {
+      console.log('No contiene elementos');
+    }
+  
+
   } else {
     console.log('No es una carpeta');
+    if (extElem == '.md') {
+      mdFiles.push(elemPath)
+    }
   }
-  return extElem;
+
+  return mdFiles;
 }
 
 const validateFile = (elemPath) => {
@@ -48,6 +74,6 @@ module.exports = {
   mdlinks,
   relativeToAbsolute,
   validatePath,
-  validateDirectory,
+  validateElem,
   validateFile
 }
