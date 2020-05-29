@@ -65,11 +65,7 @@ const validateElem = (elemPath, mdFiles = []) => {
   } else {
     console.log('No es una carpeta');
     if (extElem == '.md') {
-      const mdFilePath = mdFiles.push(elemPath)
-      mdFilePath.forEach((mdFile) => {
-        fileSystem.readlinkSync(mdFile)
-
-      });
+      mdFiles.push(elemPath)
     }
   }
 
@@ -78,8 +74,14 @@ const validateElem = (elemPath, mdFiles = []) => {
 
 
 
-const searchingLinks = (elemPath) => {
-  return false;
+const searchingLinks = (mdFiles) => {
+  const links = [];
+  mdFiles.forEach((mdFile) => {
+    const contentFile = fileSystem.readFileSync(mdFile, {encoding: 'utf8'})
+    const regExpLinks = new RegExp('\\[.+\\]\\(.+\\)+', 'g')
+    links.push(contentFile.match(regExpLinks));
+  });
+  return links;
 }
 
 module.exports = {

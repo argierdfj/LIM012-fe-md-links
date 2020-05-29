@@ -10,6 +10,8 @@ console.log(md.validatePath(absPath));
 // setTimeout(() => {
 //   console.log('-'.repeat(absPath.length));
 // }, 2000)
+const arrElems = md.validateElem(absPath)
+console.log(arrElems);
 
-console.log(md.validateElem(absPath));
+console.log(md.searchingLinks(arrElems).flat())
 
