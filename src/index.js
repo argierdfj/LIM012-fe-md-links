@@ -2,13 +2,13 @@ const axios = require('axios');
 const path = require('path');
 const fileSystem = require('fs');
 
-const mdlinks = async (elemPath, opts = undefined) => {
-  return axios.get(elemPath)
-  .then(({data}) => {
-    return data;
-  })
-  .catch()
-}
+// const mdlinks = async (elemPath, opts = undefined) => {
+//   return axios.get(elemPath)
+//   .then(({data}) => {
+//     return data;
+//   })
+//   .catch()
+// }
 
 const relativeToAbsolute = (elemPath) => {
   return path.resolve(__dirname, elemPath)
@@ -32,13 +32,15 @@ const validatePath = (elemPath) => {
 
 const validateElem = (elemPath, mdFilesPath = []) => {
   const extElem = path.extname(elemPath)
-
-  if (extElem == '') {
-    // console.log('Es una carpeta');
+  const elemName = path.basename(elemPath);
+ 
+  //? ES UN DIRECTORIO
+  if (extElem == '' && elemName.charAt(0) !== '.') {
+ 
     const elemList = fileSystem.readdirSync(elemPath);
 
+    //? CONTIENE ELEMENTOS
     if (elemList.length) {
-      // console.log('Contiene elementos');
       elemList.forEach((elem) => {
         const absPath = `${elemPath}\\${elem}`;
         validateElem(absPath, mdFilesPath)
@@ -56,6 +58,8 @@ const validateElem = (elemPath, mdFilesPath = []) => {
   return mdFilesPath;
 }
 
+
+
 const searchLinks = (mdFilesPath) => {
   const links = [];
   mdFilesPath.forEach((mdFile) => {
@@ -68,10 +72,11 @@ const searchLinks = (mdFilesPath) => {
       links: contentFile.match(regExpLinks)
     });
   });
+
   return links.flat();
 }
 
-const mdlinks = (elemPath, opts = undefined) => {
+const mdlinks = (elemPath, opts = {validate: false}) => {
   const absPath = relativeToAbsolute(elemPath)
 
   // console.log('-'.repeat(absPath.length))
@@ -80,7 +85,7 @@ const mdlinks = (elemPath, opts = undefined) => {
 
   // console.log(validatePath(absPath))
   const arrMdFilePath = validateElem(absPath)
-  
+
   const linksFound = searchLinks(arrMdFilePath);
   // console.log(linksFound);
 
@@ -89,17 +94,24 @@ const mdlinks = (elemPath, opts = undefined) => {
   linksFound.forEach((linkFound) => {
     linkFound.links.forEach((link) => {
       const str = link.split('](');
-      elemMdLinks.push(
-        {
-          URL : str[1].slice(0, -1),
-          TEXTO: str[0].slice(1, 50),
-          RUTA: linkFound.path
-        }
-      ) 
+      elemMdLinks.push({
+        URL: str[1].slice(0, -1),
+        TEXTO: str[0].slice(1, 50),
+        RUTA: linkFound.path
+      })
     });
   });
+
+  console.log(elemMdLinks);
   
-  return elemMdLinks;
+
+  return new Promise((resolve, reject) => {
+    if (elemMdLinks.length) {
+      resolve(elemMdLinks);
+    } else {
+      reject(new Error('No se encontraron links'))
+    }
+  });
 }
 
 
@@ -110,5 +122,3 @@ module.exports = {
   validateElem,
   searchLinks
 }
-
-
