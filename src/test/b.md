@@ -7,6 +7,15 @@ si tienes dudas existenciales con respecto a estas decisiones. No existe una
 - [how-to-npm](https://github.com/workshopper/how-to-npm)
 - [promise-it-wont-hurt](https://github.com/stevekane/promise-it-wont-hurt)
 
+1-> Fn para validar la ruta
+  - Recibe como parámetro la ruta del elemento
+  - Almaceno en una constante el nombre del directorio con el método path.dirname(elemPath).
+  - Almaceno en otra constante el nombre del elemento a buscar con el método path.basename(elemPath).
+  - Utilizo el método de FS readdirSync(directoryName) para leer el directorio donde estoy buscando a un determinado archivo y éste devolverá ne un arr los nombres de los elementos que contiene.
+  - Creo una variable booleana con valor False que cambiará a true si encuentra el elemento en ese directorio.
+  - Evalúo en una condicional con el método de arr includes si el arr devielto por el método readdirSync contiene el elemento que se está buscando.
+  - Si lo encuentra cambio a true el valor de la variable foundElem.
+  - Se retornará la variable foundElem, si es false entonces el nombre del archivo no se encuentra en el directorio que se está analizando, no existe, por lo tanto la ruta no es válida.
 
 2-> Fn para validar si el elemento que estamos pasando en la ruta es un directorio o un archivo.
   - Recibe como parámetro la ruta del elemento y la variable de archivos md con un array vacío.
@@ -42,4 +51,4 @@ si tienes dudas existenciales con respecto a estas decisiones. No existe una
 
   TO DO
   - Crear variable err para mostrar errores personalizados de acuerdo a lo que se esté evaluando
-  
+  - Corregir la promesa de fn mdlinks.
