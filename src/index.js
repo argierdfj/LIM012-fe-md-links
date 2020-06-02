@@ -12,8 +12,8 @@ const mdlinks = (elemPath, options = { validate: false }) =>
         const arrLinksFound = fn.findLinks(arrMdFilePath);
 
         const arrMdFileLinks = [];
+
         if (arrLinksFound.length) {
-          console.log(arrLinksFound);
           arrLinksFound.forEach((linkFound) => {
             if (linkFound.links) {
               linkFound.links.forEach((link) => {
