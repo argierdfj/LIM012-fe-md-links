@@ -3,18 +3,24 @@ const fileSystem = require('fs');
 
 const flowmd = {
   convertRelativeToAbsolutePath: (elemPath) => {
-    return path.resolve(__dirname, elemPath);
+    if (typeof elemPath === 'string') {
+      return path.resolve(__dirname, elemPath);
+    }
+    return '';
   },
   isValidPath: (elemPath) => {
-    const directoryName = path.dirname(elemPath);
-    const elemName = path.basename(elemPath);
-    const elemList = fileSystem.readdirSync(directoryName);
-
-    let foundElem = false;
-    if (elemList.includes(elemName)) {
-      foundElem = true
+    if (typeof elemPath === 'string') {
+      const directoryName = path.dirname(elemPath);
+      const elemName = path.basename(elemPath);
+      const elemList = fileSystem.readdirSync(directoryName);
+  
+      let foundElem = false;
+      if (elemList.includes(elemName)) {
+        foundElem = true
+      }
+      return foundElem;
     }
-    return foundElem;
+    return false;
   },
   getPathMdFile: (elemPath, arrMdFilesPath = []) => {
     const extElem = path.extname(elemPath)
