@@ -23,45 +23,49 @@ const flowmd = {
     return false;
   },
   getPathMdFile: (elemPath, arrMdFilesPath = []) => {
-    const extElem = path.extname(elemPath)
-    const elemName = path.basename(elemPath);
-
-    //? ES UN DIRECTORIO
-    if (extElem == '' && elemName.charAt(0) !== '.') {
-
-      const elemList = fileSystem.readdirSync(elemPath);
-
-      //? CONTIENE ELEMENTOS
-      if (elemList.length) {
-        elemList.forEach((elem) => {
-          const absPath = `${elemPath}\\${elem}`;
-          flowmd.getPathMdFile(absPath, arrMdFilesPath);
-        });
-      }
-    } else {
-      if (extElem == '.md') {
-        arrMdFilesPath.push(elemPath)
+    if (typeof elemPath === 'string') {
+      const extElem = path.extname(elemPath)
+      const elemName = path.basename(elemPath);
+  
+      //? ES UN DIRECTORIO
+      if (extElem == '' && elemName.charAt(0) !== '.') {
+  
+        const elemList = fileSystem.readdirSync(elemPath);
+  
+        //? CONTIENE ELEMENTOS
+        if (elemList.length) {
+          elemList.forEach((elem) => {
+            const absPath = `${elemPath}\\${elem}`;
+            flowmd.getPathMdFile(absPath, arrMdFilesPath);
+          });
+        }
+      } else {
+        if (extElem == '.md') {
+          arrMdFilesPath.push(elemPath)
+        }
       }
     }
-
     return arrMdFilesPath;
   },
   findLinks: (arrMdFilesPath) => {
-    const arrLinks = [];
-    if (arrMdFilesPath.length) {
-      arrMdFilesPath.forEach((mdFilePath) => {
-        const contentFile = fileSystem.readFileSync(mdFilePath, {
-          encoding: 'utf8'
-        })
-        const regExpLinks = new RegExp('\\[.+\\]\\(.+\\)+', 'g');
-        arrLinks.push({
-          path: mdFilePath,
-          links: contentFile.match(regExpLinks)
+    if (typeof arrMdFilesPath === 'object') {
+      const arrLinks = [];
+      if (arrMdFilesPath.length) {
+        arrMdFilesPath.forEach((mdFilePath) => {
+          const contentFile = fileSystem.readFileSync(mdFilePath, {
+            encoding: 'utf8'
+          })
+          const regExpLinks = new RegExp('\\[.+\\]\\(.+\\)+', 'g');
+          arrLinks.push({
+            path: mdFilePath,
+            links: contentFile.match(regExpLinks)
+          });
         });
-      });
+      }
+  
+      return arrLinks.flat();
     }
-
-    return arrLinks.flat();
+    return [];
   }
 }
 
