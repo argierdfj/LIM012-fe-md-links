@@ -3,10 +3,6 @@ si tienes dudas existenciales con respecto a estas decisiones. No existe una
 
 ### Tutoriales / NodeSchool workshoppers
 
-- [learnyounode](https://github.com/workshopper/learnyounode)
-- [how-to-npm](https://github.com/workshopper/how-to-npm)
-- [promise-it-wont-hurt](https://github.com/stevekane/promise-it-wont-hurt)
-
 1-> Fn para validar la ruta
   - Recibe como parámetro la ruta del elemento
   - Almaceno en una constante el nombre del directorio con el método path.dirname(elemPath).
