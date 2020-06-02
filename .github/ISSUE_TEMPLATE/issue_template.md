@@ -1,12 +1,3 @@
----
-name: issue_template
-about: Para describir errores o problemas
-title: ''
-labels: ''
-assignees: ''
-
----
-
 - **Issues**, son los problemas o incidencias que se deben mejorar en el proyecto. Pueden ser algo que no esté funcionando tan bien, un bug específico, o bien una propuesta de mejora.
 - **Milestones**, es una forma de agrupar un conjunto de issues o pull request, permite organizar las tareas en grupos grandes. En caso de que tengamos diferentes categorías de issues las podemos volver Milestones.
 
