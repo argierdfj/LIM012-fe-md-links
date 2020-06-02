@@ -1,8 +1,8 @@
 ---
 name: Custom issue template
-about: Describe this issue template's purpose here.
-title: ''
-labels: ''
+about: Para describir errores o problemas
+title: issue_template
+labels: bug
 assignees: ''
 
 ---
@@ -15,4 +15,3 @@ Explicación del problema y cómo replicarlo paso a paso y en qué OS ocurre.
 
 ## ¿En qué versión del OS ocurre?
 Si este problema ocurre en todas las versiones, indicarlo acá.
-
