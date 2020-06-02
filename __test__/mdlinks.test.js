@@ -47,7 +47,7 @@ describe('RESOLVIENDO A RUTA ABSOLUTA', () => {
 
 describe('VERIFICANDO SI LA RUTA ES VÁLIDA', () => {
   test('Probando con la ruta a un elemento que si existe', () => {
-    const absPath = flowmd.convertRelativeToAbsolutePath('./a.md')
+    const absPath = flowmd.convertRelativeToAbsolutePath('./paso-a-paso.md')
     expect(flowmd.isValidPath(absPath)).toBe(true);
   });
   test('Probando con la ruta a un elemento que no existe', () => {
@@ -61,14 +61,14 @@ describe('VERIFICANDO SI LA RUTA ES VÁLIDA', () => {
 
 describe('OBTENIENDO RUTAS DE ARCHIVOS MD', () => {
   test('Probando con un directorio vacío', () => {
-    const absPath = flowmd.convertRelativeToAbsolutePath('./prueba');
+    const absPath = flowmd.convertRelativeToAbsolutePath('./test_2');
     expect(flowmd.getPathMdFile(absPath)).toEqual([]);
   });
   test('Probando con un directorio con elementos', () => {
     const absPath = flowmd.convertRelativeToAbsolutePath('../src');
     expect(flowmd.getPathMdFile(absPath)).toEqual([
-      `C:\\Users\\Estudiante\\Desktop\\Proyectos Laboratoria\\LIM012-fe-md-links\\src\\a.md`,
-      `C:\\Users\\Estudiante\\Desktop\\Proyectos Laboratoria\\LIM012-fe-md-links\\src\\test\\paso-a-paso.md`,
+      `C:\\Users\\Estudiante\\Desktop\\Proyectos Laboratoria\\LIM012-fe-md-links\\src\\paso-a-paso.md`,
+      `C:\\Users\\Estudiante\\Desktop\\Proyectos Laboratoria\\LIM012-fe-md-links\\src\\test\\test.md`,
     ]);
   });
   test('Probando con un archivo md', () => {
@@ -79,7 +79,7 @@ describe('OBTENIENDO RUTAS DE ARCHIVOS MD', () => {
 
 describe('ENCONTRANDO LINKS EN ARCHIVOS MD', () => {
   test('Probando con un archivo md lleno de enlaces', () => {
-    expect(flowmd.findLinks(['C:\\Users\\Estudiante\\Desktop\\Proyectos Laboratoria\\LIM012-fe-md-links\\src\\a.md'])[0].links[0]).toBe('[learnyounode](https://github.com/workshopper/learnyounode)');
+    expect(flowmd.findLinks(['C:\\Users\\Estudiante\\Desktop\\Proyectos Laboratoria\\LIM012-fe-md-links\\src\\test\\test.md'])[0].links[0]).toBe('[learnyounode](https://github.com/workshopper/learnyounode)');
   });
   test('Probando con un string', () => {
     expect(flowmd.findLinks('array de links')).toEqual([]);
