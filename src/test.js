@@ -1,6 +1,6 @@
 const axios = require('axios');
 const mdLinks = require('./index.js');
-const path = '../'
+const path = '../prueba'
 const fnMdLinks = mdLinks(path, { validate: true });
 
 fnMdLinks.then((links) => {
