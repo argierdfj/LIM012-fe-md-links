@@ -25,9 +25,9 @@ describe('RESOLVIENDO A RUTA ABSOLUTA', () => {
   test('Probando con una ruta de una carpeta', () => {
     expect(flowmd.convertRelativeToAbsolutePath('../__test__/prueba')).toBe(`${__dirname}\\prueba`);
   });
-  // test('Probando con un String vacío', () => {
-  //   expect(flowmd.convertRelativeToAbsolutePath('')).toBe(__dirname);
-  //   });
+  test('Probando con un String vacío', () => {
+    expect(flowmd.convertRelativeToAbsolutePath('')).toBe('C:\\Users\\Estudiante\\Desktop\\Proyectos Laboratoria\\LIM012-fe-md-links\\src');
+    });
   test('Probando con un Número', () => {
     expect(flowmd.convertRelativeToAbsolutePath(2)).toBe('');
   });
@@ -47,26 +47,41 @@ describe('RESOLVIENDO A RUTA ABSOLUTA', () => {
 
 describe('VERIFICANDO SI LA RUTA ES VÁLIDA', () => {
   test('Probando con la ruta a un elemento que si existe', () => {
-    const path = flowmd.convertRelativeToAbsolutePath('./a.md')
-    expect(flowmd.isValidPath(path)).toBe(true);
+    const absPath = flowmd.convertRelativeToAbsolutePath('./a.md')
+    expect(flowmd.isValidPath(absPath)).toBe(true);
   });
   test('Probando con la ruta a un elemento que no existe', () => {
-    const path = flowmd.convertRelativeToAbsolutePath('../algo.md')
-    expect(flowmd.isValidPath(path)).toBe(false);
+    const absPath = flowmd.convertRelativeToAbsolutePath('../algo.md')
+    expect(flowmd.isValidPath(absPath)).toBe(false);
   });
   test('Probando con un número', () => {
     expect(flowmd.isValidPath(6)).toBe(false);
   });
 });
 
-// describe('Verificar elemento', () => {
-//   test('Verificando si es una carpeta', () => {
-//     expect(md.validateFolder('./algo.md')).toBe(true);
-//   });
-// });
+describe('OBTENIENDO RUTAS DE ARCHIVOS MD', () => {
+  test('Probando con un directorio vacío', () => {
+    const absPath = flowmd.convertRelativeToAbsolutePath('./prueba');
+    expect(flowmd.getPathMdFile(absPath)).toEqual([]);
+  });
+  test('Probando con un directorio con elementos', () => {
+    const absPath = flowmd.convertRelativeToAbsolutePath('../src');
+    expect(flowmd.getPathMdFile(absPath)).toEqual([
+      `C:\\Users\\Estudiante\\Desktop\\Proyectos Laboratoria\\LIM012-fe-md-links\\src\\a.md`,
+      `C:\\Users\\Estudiante\\Desktop\\Proyectos Laboratoria\\LIM012-fe-md-links\\src\\test\\paso-a-paso.md`,
+    ]);
+  });
+  test('Probando con un archivo md', () => {
+    const absPath = flowmd.convertRelativeToAbsolutePath('./paso_a_paso.md');
+    expect(flowmd.getPathMdFile(absPath)).toEqual(['C:\\Users\\Estudiante\\Desktop\\Proyectos Laboratoria\\LIM012-fe-md-links\\src\\paso_a_paso.md']);
+  });
+});
 
-// describe('validar archivos md', () => {
-//   test('verificando si el archivo es formato md', () => {
-//     expect(md.validateFile('./algo.md')).toBe(false);
-//   });
-// });
+describe('ENCONTRANDO LINKS EN ARCHIVOS MD', () => {
+  test('Probando con un archivo md lleno de enlaces', () => {
+    expect(flowmd.findLinks(['C:\\Users\\Estudiante\\Desktop\\Proyectos Laboratoria\\LIM012-fe-md-links\\src\\a.md'])[0].links[0]).toBe('[learnyounode](https://github.com/workshopper/learnyounode)');
+  });
+  test('Probando con un string', () => {
+    expect(flowmd.findLinks('array de links')).toEqual([]);
+  });
+});
