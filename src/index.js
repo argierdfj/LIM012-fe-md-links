@@ -1,13 +1,6 @@
 const fn = require('./flowmd.js');
 const axios = require('axios');
 
-/* const mdlinks = async (elemPath, opts = undefined) => {
-   return axios.get(elemPath)
-  .then(({data}) => {
-    return data;
-  })
-} */
-
 const mdlinks = (elemPath, options = { validate: false }) =>
   new Promise((resolve, reject) => {
     const absPath = fn.convertRelativeToAbsolutePath(elemPath);
@@ -18,9 +11,9 @@ const mdlinks = (elemPath, options = { validate: false }) =>
       if (arrMdFilePath.length) {
         const arrLinksFound = fn.findLinks(arrMdFilePath);
 
-        // URL, TEXTO, RUTA
         const arrMdFileLinks = [];
         if (arrLinksFound.length) {
+          console.log(arrLinksFound);
           arrLinksFound.forEach((linkFound) => {
             if (linkFound.links) {
               linkFound.links.forEach((link) => {
@@ -37,9 +30,9 @@ const mdlinks = (elemPath, options = { validate: false }) =>
 
         if (arrMdFileLinks.length) {
           if (options.validate) {
-            const queryArr = [];
+            const arrLinkStatus = [];
             arrMdFileLinks.forEach((mdFileLinks) => {
-              queryArr.push(axios.get(mdFileLinks.href)
+              arrLinkStatus.push(axios.get(mdFileLinks.href)
                 .then((data) => {
                   return {
                     ...mdFileLinks,
@@ -56,7 +49,7 @@ const mdlinks = (elemPath, options = { validate: false }) =>
                 })
               );
             });
-            resolve(Promise.all(queryArr))     
+            resolve(Promise.all(arrLinkStatus))     
           } else {
             resolve(arrMdFileLinks);
           }
@@ -75,11 +68,3 @@ const mdlinks = (elemPath, options = { validate: false }) =>
 
 
 module.exports = mdlinks;
-
-// const esteEsMiMetodoPrincipal = (path, options) => new Promise((resolve, reject) => {
-// })
-
-// /*
-// Resolve == Return
-// Reject == Throw
-// */
