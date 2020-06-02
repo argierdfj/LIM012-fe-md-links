@@ -1,7 +1,6 @@
 const mdlinks = require('../src/index.js');
 const flowmd = require('../src/flowmd.js');
 
-
 // describe('Test asíncrono', () => {
 //   test('Realizando una petición a una API', (done) => {
 //     const api = 'https://us-central1-movistar-web-publica.cloudfunctions.net/ga_flow/hello_world'
