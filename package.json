@@ -1,0 +1,40 @@
+{
+  "name": "md-links",
+  "version": "1.0.0",
+  "description": "Crear una libreria para verificar links en archivos formato Markdown.",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "jest --coverage",
+    "start": "node ./src/prueba.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/argierdfj/LIM012-fe-md-links.git"
+  },
+  "keywords": [
+    "javascript",
+    "node",
+    "package"
+  ],
+  "author": "Argie Rincon <argierincon@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/argierdfj/LIM012-fe-md-links/issues"
+  },
+  "homepage": "https://github.com/argierdfj/LIM012-fe-md-links#readme",
+  "devDependencies": {
+    "@babel/core": "^7.2.2",
+    "@babel/plugin-transform-modules-commonjs": "^7.2.0",
+    "babel-jest": "^26.0.1",
+    "babel-polyfill": "^6.26.0",
+    "eslint": "^7.1.0",
+    "eslint-config-airbnb-base": "^14.1.0",
+    "eslint-plugin-jest": "^23.13.1",
+    "jest": "^26.0.1"
+  },
+  "dependencies": {
+    "axios": "^0.19.2",
+    "fs": "0.0.1-security",
+    "path": "^0.12.7"
+  }
+}
