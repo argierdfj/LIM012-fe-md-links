@@ -24,14 +24,13 @@ const flowmd = {
   },
   getPathMdFile: (elemPath, arrMdFilesPath = []) => {
     if (typeof elemPath === 'string') {
-      const extElem = path.extname(elemPath)
+      const extElem = path.extname(elemPath);
       const elemName = path.basename(elemPath);
+      const directory = fileSystem.statSync(elemPath);
   
       //? ES UN DIRECTORIO
-      if (extElem == '' && elemName.charAt(0) !== '.') {
-  
+      if (directory.isDirectory() && elemName !== 'node_modules') {
         const elemList = fileSystem.readdirSync(elemPath);
-  
         //? CONTIENE ELEMENTOS
         if (elemList.length) {
           elemList.forEach((elem) => {
