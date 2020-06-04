@@ -40,7 +40,7 @@ const flowmd = {
         }
       } else {
         if (extElem == '.md') {
-          arrMdFilesPath.push(elemPath);
+          arrMdFilesPath.push(elemPath)
         }
       }
     }
