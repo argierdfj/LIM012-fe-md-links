@@ -10,7 +10,7 @@ describe('RESOLVIENDO A RUTA ABSOLUTA', () => {
   });
   test('Probando con un String vacío', () => {
     expect(flowmd.convertRelativeToAbsolutePath('')).toBe('C:\\Users\\Estudiante\\Desktop\\Proyectos Laboratoria\\LIM012-fe-md-links\\src');
-    });
+  });
   test('Probando con un Número', () => {
     expect(flowmd.convertRelativeToAbsolutePath(2)).toBe('');
   });
@@ -37,8 +37,23 @@ describe('VERIFICANDO SI LA RUTA ES VÁLIDA', () => {
     const absPath = flowmd.convertRelativeToAbsolutePath('../test.md');
     expect(flowmd.isValidPath(absPath)).toBe(false);
   });
-  test('Probando con un número', () => {
-    expect(flowmd.isValidPath(6)).toBe(false);
+  test('Probando con un String vacío', () => {
+    expect(flowmd.isValidPath('')).toBe(false);
+  });
+  test('Probando con un Número', () => {
+    expect(flowmd.isValidPath(2)).toBe(false);
+  });
+  test('Probando con un Array', () => {
+    expect(flowmd.isValidPath([])).toBe(false);
+  });
+  test('Probando con un Objeto', () => {
+    expect(flowmd.isValidPath({})).toBe(false);
+  });
+  test('Probando con un Booleano', () => {
+    expect(flowmd.isValidPath(true)).toBe(false);
+  });
+  test('Probando con una Función', () => {
+    expect(flowmd.isValidPath(() => {})).toBe(false);
   });
 });
 
@@ -54,42 +69,81 @@ describe('OBTENIENDO RUTAS DE ARCHIVOS MD', () => {
     ]);
   });
   test('Probando con un archivo md', () => {
-    const absPath = flowmd.convertRelativeToAbsolutePath('../paso_a_paso.md');
-    expect(flowmd.getPathMdFile(absPath)).toEqual(['C:\\Users\\Estudiante\\Desktop\\Proyectos Laboratoria\\LIM012-fe-md-links\\paso_a_paso.md']);
+    const absPath = flowmd.convertRelativeToAbsolutePath('../paso-a-paso.md');
+    expect(flowmd.getPathMdFile(absPath)).toEqual(['C:\\Users\\Estudiante\\Desktop\\Proyectos Laboratoria\\LIM012-fe-md-links\\paso-a-paso.md']);
   });
 });
 
 describe('ENCONTRANDO LINKS EN ARCHIVOS MD', () => {
-  test('Probando con un archivo md con enlaces', () => {
+  test('Probando con un archivo md que contiene enlaces', () => {
     expect(flowmd.findLinks(['C:\\Users\\Estudiante\\Desktop\\Proyectos Laboratoria\\LIM012-fe-md-links\\__test__\\test\\test.md'])[0].links[0]).toBe('[learnyounode](https://github.com/workshopper/learnyounode)');
   });
   test('Probando con un string', () => {
     expect(flowmd.findLinks('array de links')).toEqual([]);
   });
+  test('Probando con un array vacío', () => {
+    expect(flowmd.findLinks([])).toEqual([]);
+  });
 });
 
 describe('PROBANDO FUNCIÓN MD LINKS', () => {
-  test('Realizando petición a http', (done) => {
+  test('Probando con un archivo md que contiene enlaces', (done) => {
     const api = flowmd.convertRelativeToAbsolutePath('../__test__/test/test.md');
-    mdlinks(api).then((links) => {     
+    mdlinks(api).then((links) => {
       expect(links[0]).toEqual({
         'file': 'C:\\Users\\Estudiante\\Desktop\\Proyectos Laboratoria\\LIM012-fe-md-links\\__test__\\test\\test.md',
         'href': 'https://github.com/workshopper/learnyounode',
-        'text': 'learnyounode'})
+        'text': 'learnyounode'
+      })
       done();
     })
   });
-  // test('Realizando petición a http2222222', (done) => {
-  //   const api = flowmd.convertRelativeToAbsolutePath('../__test__/test/test.md');
-  //   mdlinks(api, { validate: true })
-  //   .then((links) => {     
-  //     expect(links[2]).toEqual({
-  //       'file': 'C:\\Users\\Estudiante\\Desktop\\Proyectos Laboratoria\\LIM012-fe-md-links\\__test__\\test\\test.md',
-  //       'href': "https://github.com/stevekane/promise-it-wont-hurt",
-  //       'msg': "OK",
-  //       'status': 300,
-  //       'text': "promise-it-wont-hurt",})
-  //     done();
-  //   })
-  // });
+  test('Probando con un directorio con elementos', (done) => {
+    const api = flowmd.convertRelativeToAbsolutePath('../__test__/');
+    mdlinks(api).then((links) => {
+      expect(links[0]).toEqual({
+        'file': 'C:\\Users\\Estudiante\\Desktop\\Proyectos Laboratoria\\LIM012-fe-md-links\\__test__\\test\\test.md',
+        'href': 'https://github.com/workshopper/learnyounode',
+        'text': 'learnyounode'
+      })
+      done();
+    })
+  });
+  test('Probando con un archivo html', (done) => {
+    const api = flowmd.convertRelativeToAbsolutePath('../__test__/test/test.html');
+    mdlinks(api).catch((err) => {
+      expect(err).toEqual(new Error('No se encontraron archivos .md'));
+      done();
+    })
+  });
+  test('Probando con una ruta que no es válida', (done) => {
+    const api = flowmd.convertRelativeToAbsolutePath('.test.html');
+    mdlinks(api).catch((err) => {
+      expect(err).toEqual(new Error('La ruta ingresada no es válida'));
+      done();
+    })
+  });
+  test('Probando con un archivo md que no continen links', (done) => {
+    const api = flowmd.convertRelativeToAbsolutePath('../paso-a-paso.md');
+    mdlinks(api).catch((err) => {
+      expect(err).toEqual(new Error('No se encontraron links'));
+      done();
+    })
+  });
+  test('Realizando petición a http2222222', (done) => {
+    const api = flowmd.convertRelativeToAbsolutePath('../__test__/test/test.md');
+    mdlinks(api, {
+        validate: true
+      })
+      .then((links) => {
+        expect(links[2]).toEqual({
+          'file': 'C:\\Users\\Estudiante\\Desktop\\Proyectos Laboratoria\\LIM012-fe-md-links\\__test__\\test\\test.md',
+          'href': "https://github.com/stevekane/promise-it-wont-hurt",
+          'msg': "OK",
+          'status': 200,
+          'text': "promise-it-wont-hurt",
+        })
+        done();
+      })
+  });
 });
