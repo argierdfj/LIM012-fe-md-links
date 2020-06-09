@@ -44,7 +44,7 @@ const mdlinks = (elemPath, options = { validate: false }) =>
                   // console.log(err.response)
                   return {
                     ...mdFileLinks,
-                    status: err.response.status,
+                    status: err.response ? err.response.status : 999,
                     msg: 'FAIL'
                   }                  
                 })
