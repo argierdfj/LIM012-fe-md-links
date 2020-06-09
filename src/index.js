@@ -41,6 +41,7 @@ const mdlinks = (elemPath, options = { validate: false }) =>
                   }
                 })
                 .catch((err) => {
+                  // console.log(err.response)
                   return {
                     ...mdFileLinks,
                     status: err.response.status,
