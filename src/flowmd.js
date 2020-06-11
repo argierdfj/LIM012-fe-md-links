@@ -13,7 +13,7 @@ const flowmd = {
       const directoryName = path.dirname(elemPath);
       const elemName = path.basename(elemPath);
       const elemList = fileSystem.readdirSync(directoryName);
-  
+
       let foundElem = false;
       if (elemList.includes(elemName)) {
         foundElem = true
@@ -27,7 +27,7 @@ const flowmd = {
       const extElem = path.extname(elemPath);
       const elemName = path.basename(elemPath);
       const directory = fileSystem.statSync(elemPath);
-  
+
       //? ES UN DIRECTORIO
       if (directory.isDirectory() && elemName !== 'node_modules') {
         const elemList = fileSystem.readdirSync(elemPath);
@@ -61,7 +61,7 @@ const flowmd = {
           });
         });
       }
-  
+
       return arrLinks.flat();
     }
     return [];

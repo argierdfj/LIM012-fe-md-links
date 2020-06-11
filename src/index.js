@@ -67,5 +67,4 @@ const mdlinks = (elemPath, options = { validate: false }) =>
     }
   });
 
-
 module.exports = mdlinks;
