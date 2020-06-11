@@ -4,8 +4,12 @@
 
 ## Objetivos de aprendizaje
 
-Recuerda colocar en esta seccion los objetivos de aprendizaje que quedaron 
-pendientes de tu proyecto anterior.
+### Organización en Github
+
+* [x] Projects
+* [x] Issues
+* [x] Labels
+* [x] Milestones
 
 ### Javascript
 - [x] Uso de callbacks
