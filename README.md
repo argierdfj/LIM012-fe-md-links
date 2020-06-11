@@ -8,7 +8,7 @@ Recuerda colocar en esta seccion los objetivos de aprendizaje que quedaron
 pendientes de tu proyecto anterior.
 
 ### Javascript
-- [ x ] Uso de callbacks
+- [x] Uso de callbacks
 - [x] Consumo de Promesas
 - [x] Creacion de Promesas
 - [x] Modulos de Js
