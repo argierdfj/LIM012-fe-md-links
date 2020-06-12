@@ -10,13 +10,21 @@ $ npm install argierdfj/LIM012-fe-md-links
 ```js
 const mdlinks = require('mdlinks');
 
-const fnMdLinks = mdLinks(path, options)
-.then((links) => {
-  console.log(links);
-})
-.catch((err) => {
-  console.log(err.message);
-});
+mdLinks(path)
+  .then((links) => {
+    // => [{ href, text, file }]
+  })
+  .catch((err) => {
+    console.log(err.message);
+  });
+
+mdLinks(path, { validate: true })
+  .then((links) => {
+    // => [{ href, text, file, status, ok }]
+  })
+  .catch((err) => {
+    console.log(err.message);
+  });
 ```
 
 ## CLI
