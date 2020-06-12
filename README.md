@@ -3,13 +3,11 @@
 ![Flowchart mdlinks](./src/img/diagrama-mdlinks.png)
 
 ### Install
-***
 ``` 
 $ npm install argierdfj/LIM012-fe-md-links
 ```
 ### Usage
-***
-```
+```js
 const mdlinks = require('mdlinks');
 
 mdlinks();
