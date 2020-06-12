@@ -2,15 +2,67 @@
 
 ![Flowchart mdlinks](./src/img/diagrama-mdlinks.png)
 
-## Install
+## Instalación
 ``` 
 $ npm install argierdfj/LIM012-fe-md-links
 ```
-## Usage
+## Uso
 ```js
 const mdlinks = require('mdlinks');
 
-mdlinks();
+const fnMdLinks = mdLinks(path, options);
+
+fnMdLinks.then((links) => {
+  console.log(links)
+})
+.catch((err) => {
+  console.log(err.message);
+});
+```
+
+## CLI
+```
+$ npm install argierdfj/LIM012-fe-md-links
+```
+```
+$ mdlinks ./path
+  [
+    {
+      href: 'url',
+      text: 'texto',
+      file: 'ruta'
+    }
+  ]
+
+
+$ mdlinks ./path --validate
+  [
+    {
+      href: 'url',
+      text: 'texto',
+      file: 'ruta',
+      status: 200,
+      msg: 'OK'
+    },
+    {
+      href: 'url',
+      text: 'texto',
+      file: 'ruta',
+      status: 500,
+      msg: 'FAIL'
+    }
+  ]
+
+$ mdlinks ./path --stats
+    Total: 54
+    Unique: 53
+    
+
+$ mdlinks ./path --validate --stats
+    Total: 54
+    Unique: 53
+    Broken: 5
+
 ```
 
 
