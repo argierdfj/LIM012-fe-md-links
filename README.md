@@ -2,7 +2,24 @@
 
 ![Flowchart mdlinks](./src/img/diagrama-mdlinks.png)
 
+### Install
+***
+``` 
+$ npm install argierdfj/LIM012-fe-md-links
+```
+### Usage
+***
+```
+const mdlinks = require('mdlinks');
+
+mdlinks();
+```
+
+
+
 ## Objetivos de aprendizaje
+
+### Pendientes.
 
 ### Organización en Github
 
@@ -10,6 +27,8 @@
 * [x] Issues
 * [x] Labels
 * [x] Milestones
+
+### Del proyecto.
 
 ### Javascript
 - [x] Uso de callbacks
