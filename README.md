@@ -2,6 +2,10 @@
 
 ![Flowchart mdlinks](./src/img/diagrama-mdlinks.png)
 
+### CLI
+
+![Flowchart CLI](./src/img/diagrama-cli.png)
+
 ## Instalación
 ``` 
 $ npm install argierdfj/LIM012-fe-md-links
