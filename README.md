@@ -26,7 +26,7 @@ mdLinks(path)
 
 mdLinks(path, { validate: true })
   .then((links) => {
-    // => [{ href, text, file, status, ok }]
+    // => [{ href, text, file, status, msg }]
   })
   .catch((err) => {
     console.log(err.message);
