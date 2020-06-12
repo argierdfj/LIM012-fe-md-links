@@ -2,6 +2,7 @@
 
 #### MDLINKS es una librería que permite leer y analizar archivos en formato markdown para verificar los links que contengan y reportar algunas estadísticas.
 
+### Flowchart
 ![Flowchart mdlinks](./src/img/diagrama-mdlinks.png)
 
 ### CLI
