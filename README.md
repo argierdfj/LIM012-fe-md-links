@@ -10,9 +10,8 @@ $ npm install argierdfj/LIM012-fe-md-links
 ```js
 const mdlinks = require('mdlinks');
 
-const fnMdLinks = mdLinks(path, options);
-
-fnMdLinks.then((links) => {
+const fnMdLinks = mdLinks(path, options)
+.then((links) => {
   console.log(links)
 })
 .catch((err) => {
@@ -56,7 +55,7 @@ $ mdlinks ./path --validate
 $ mdlinks ./path --stats
     Total: 54
     Unique: 53
-    
+
 
 $ mdlinks ./path --validate --stats
     Total: 54
@@ -64,7 +63,8 @@ $ mdlinks ./path --validate --stats
     Broken: 5
 
 ```
-
+## Licencia
+MIT ©
 
 
 ## Objetivos de aprendizaje
