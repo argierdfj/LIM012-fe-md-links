@@ -82,3 +82,26 @@ PATH y FS.
     * Al valor de msg le asigno el string 'FAIL', porque la solicitud no respondió correctamente con un código de estatus entre 400 y 500.
 
     #NOTA: AXIOS regresa una promesa y garantiza el funcionamiento en cualquier navegador,detecta en qué navegador está trabajando y se adapta al XMLHttpRequest o fetch. Es de grna utilidad en proyectos grandes porque garantiza que siempre va a retornar una promesa sea lo que sea donde estemos trabajando.
+
+# OBJETIVOS DE APRENDIZAJE
+
+- [x] Uso de callbacks
+    Se utilizan para manejar la asincronía en el lenguaje.
+    JavaScript cuando ejecuta código lo hace de manera síncrona, pero una forma que tiene de ejecutar código asíncrono es con las funciones llamadas “Callbacks”.
+    Éstas se ejecutan y nos devuelven el proceso, generalmente después de algún evento de tiempo, al completarse un request o al terminar de leer un archivo.
+
+- [x] Consumo de promesas
+    Para obtener el valor de la resolucion de la promesa se utiliza el método then que tiene como parametro una función que a su vez tendrá como parametro el valor que esperamos obtener.
+    Si sucede algun error en la promesa y se rechaza utilizamos el metodo catch que tambien recibe como parámetro una función que va a tener como parámetro el error que arrojó la promesa.
+
+- [x] Creación de promesas
+    Son objetos y están asociadas a las tareas asincronicas.
+    Para crear las promesas se usa la clase Promise. El constructor de Promise recibe un sólo argumento, un callback con dos parámetros, resolve y reject. resolve es la función a ejecutar cuando se resuelve y reject cuando se rechaza.
+    Al crear una promesa va a estar en estado pendiente.
+    las promesas tienen 3 estados:
+      * Pending: Pendiente.
+      * Rejected: Rechazada.
+      * Fullfiled: Completada exitosamente.
+      * Setted: completa, rechazada.
+
+
