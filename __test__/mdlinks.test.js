@@ -1,3 +1,4 @@
+const mockAxios = require('axios');
 const mdlinks = require('../src/index.js');
 const flowmd = require('../src/flowmd.js');
 
@@ -98,7 +99,7 @@ describe('PROBANDO FUNCIÓN MD LINKS', () => {
       done();
     })
   });
-  test('Probando con un directorio con elementos', (done) => {
+  test('Probando con un directorio que contiene elementos', (done) => {
     const api = flowmd.convertRelativeToAbsolutePath('../__test__/');
     mdlinks(api).then((links) => {
       expect(links[0]).toEqual({
@@ -130,7 +131,15 @@ describe('PROBANDO FUNCIÓN MD LINKS', () => {
       done();
     })
   });
-  test('Realizando petición a http2222222', (done) => {
+
+  test('Realizando petición a http 200', (done) => {
+    mockAxios.get.mockImplementation(() =>
+      Promise.resolve({
+        status: 200
+      })
+    );
+
+
     const api = flowmd.convertRelativeToAbsolutePath('../__test__/test/test.md');
     mdlinks(api, {
         validate: true
@@ -142,6 +151,76 @@ describe('PROBANDO FUNCIÓN MD LINKS', () => {
           'msg': "OK",
           'status': 200,
           'text': "promise-it-wont-hurt",
+        })
+        done();
+      })
+  });
+
+  test('Realizando petición a http 400', (done) => {
+    mockAxios.get.mockImplementation(() =>
+      Promise.reject({
+        response : { status: 400 }
+      })
+    );
+
+
+    const api = flowmd.convertRelativeToAbsolutePath('../__test__/test/test.md');
+    mdlinks(api, {
+        validate: true
+      })
+      .then((links) => {
+        expect(links[3]).toEqual({
+          href: 'https://us-central1-movistar-web-publica.cloudfunctions.net/ga_flow/hello_world/400',
+          text: 'error 400 test',
+          file: 'C:\\Users\\Estudiante\\Desktop\\Proyectos Laboratoria\\LIM012-fe-md-links\\__test__\\test\\test.md',
+          status: 400,
+          msg: 'FAIL'
+        })
+        done();
+      })
+  });
+
+  test('Realizando petición a http 500', (done) => {
+    mockAxios.get.mockImplementation(() =>
+      Promise.reject({
+        response : { status: 500 }
+      })
+    );
+
+
+    const api = flowmd.convertRelativeToAbsolutePath('../__test__/test/test.md');
+    mdlinks(api, {
+        validate: true
+      })
+      .then((links) => {
+        expect(links[4]).toEqual({
+          href: 'https://us-central1-movistar-web-publica.cloudfunctions.net/ga_flow/hello_world/500',
+          text: 'error 500 test',
+          file: 'C:\\Users\\Estudiante\\Desktop\\Proyectos Laboratoria\\LIM012-fe-md-links\\__test__\\test\\test.md',
+          status: 500,
+          msg: 'FAIL'
+        })
+        done();
+      })
+  });
+
+  test('Realizando petición a http 999', (done) => {
+    mockAxios.get.mockImplementation(() =>
+      Promise.reject({})
+    );
+
+
+    const api = flowmd.convertRelativeToAbsolutePath('../__test__/test/test.md');
+    mdlinks(api, {
+        validate: true
+      })
+      .then((links) => {
+        expect(links[4]).toEqual({
+          href: 'https://us-central1-movistar-web-publica.cloudfunctions.net/ga_flow/hello_world/500',
+          text: 'error 500 test',
+          file: 'C:\\Users\\Estudiante\\Desktop\\Proyectos Laboratoria\\LIM012-fe-md-links\\__test__\\test\\test.md',
+          status: 999,
+          msg: 'FAIL'
         })
         done();
       })
