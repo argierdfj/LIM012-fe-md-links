@@ -1,7 +1,9 @@
 const fn = require('./flowmd.js');
 const axios = require('axios');
 
-const mdlinks = (elemPath, options = { validate: false }) =>
+const mdlinks = (elemPath, options = {
+    validate: false
+  }) =>
   new Promise((resolve, reject) => {
     const absPath = fn.convertRelativeToAbsolutePath(elemPath);
 
@@ -41,16 +43,15 @@ const mdlinks = (elemPath, options = { validate: false }) =>
                   }
                 })
                 .catch((err) => {
-                  // console.log(err.response)
                   return {
                     ...mdFileLinks,
                     status: err.response ? err.response.status : 999,
                     msg: 'FAIL'
-                  }                  
+                  }
                 })
               );
             });
-            resolve(Promise.all(arrLinkStatus))     
+            resolve(Promise.all(arrLinkStatus))
           } else {
             resolve(arrMdFileLinks);
           }

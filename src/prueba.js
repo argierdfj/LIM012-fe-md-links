@@ -1,4 +1,3 @@
-// const axios = require('axios');
 const mdLinks = require('./index.js');
 const path = '../__test__'
 const fnMdLinks = mdLinks(path, { validate: true });
