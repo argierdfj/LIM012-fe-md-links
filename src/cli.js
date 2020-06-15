@@ -55,7 +55,7 @@ const cli = (args) => {
       } else {
         const relativePath = process.cwd();
         links.forEach((e) => {
-          const path = chalk.magenta(e.file.replace(relativePath, '.'));
+          const path = chalk.cyan(e.file.replace(relativePath, '.'));
           const url = e.href;
           const text = chalk.blue(e.text);
 
