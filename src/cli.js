@@ -41,7 +41,14 @@ const cli = (args) => {
           console.log('Broken: ' + brokenLinks.length);
         }
       } else {
-        console.log(links);
+        const relativePath = process.cwd();
+        links.forEach((e) => {
+          const path = e.file.replace(relativePath, '.');
+          const url = e.href;
+          const text = e.text;
+
+          console.log(`${path} ${url} ${text}`);
+        });
       }
     }).catch((err) => {
       console.log(err.message);
