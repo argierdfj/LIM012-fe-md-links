@@ -4,7 +4,7 @@ const fileSystem = require('fs');
 const flowmd = {
   convertRelativeToAbsolutePath: (elemPath) => {
     if (typeof elemPath === 'string') {
-      return path.resolve(__dirname, elemPath);
+      return path.resolve(process.cwd(), elemPath);
     }
     return '';
   },
