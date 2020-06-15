@@ -40,8 +40,26 @@ const cli = (args) => {
           const brokenLinks = links.filter((link) => link.msg === 'FAIL');
           console.log('Broken: ' + brokenLinks.length);
         }
+      } else if (validate) {
+        const relativePath = process.cwd();
+        links.forEach((e) => {
+          const path = e.file.replace(relativePath, '.');
+          const url = e.href;
+          const text = e.text;
+          const status = e.status;
+          const msg = e.msg;
+
+          console.log(`${path} ${url} ${text} ${status} ${msg}`);
+        });
       } else {
-        console.log(links);
+        const relativePath = process.cwd();
+        links.forEach((e) => {
+          const path = e.file.replace(relativePath, '.');
+          const url = e.href;
+          const text = e.text;
+
+          console.log(`${path} ${url} ${text}`);
+        });
       }
     }).catch((err) => {
       console.log(err.message);
