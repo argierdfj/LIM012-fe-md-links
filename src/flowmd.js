@@ -4,7 +4,7 @@ const fileSystem = require('fs');
 const flowmd = {
   convertRelativeToAbsolutePath: (elemPath) => {
     if (typeof elemPath === 'string') {
-      return path.resolve(__dirname, elemPath);
+      return path.resolve(process.cwd(), elemPath);
     }
     return '';
   },
@@ -49,6 +49,7 @@ const flowmd = {
   findLinks: (arrMdFilesPath) => {
     if (typeof arrMdFilesPath === 'object') {
       const arrLinks = [];
+
       if (arrMdFilesPath.length) {
         arrMdFilesPath.forEach((mdFilePath) => {
           const contentFile = fileSystem.readFileSync(mdFilePath, {
