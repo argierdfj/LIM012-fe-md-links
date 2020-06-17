@@ -99,6 +99,17 @@ describe('PROBANDO FUNCIÓN MD LINKS', () => {
       done();
     })
   });
+  test('Probando con un objeto vacío', (done) => {
+    const api = flowmd.convertRelativeToAbsolutePath('../__test__/test/test.md');
+    mdlinks(api, {}).then((links) => {
+      expect(links[0]).toEqual({
+        'file': 'C:\\Users\\Estudiante\\Desktop\\Proyectos Laboratoria\\LIM012-fe-md-links\\__test__\\test\\test.md',
+        'href': 'https://github.com/workshopper/learnyounode',
+        'text': 'learnyounode'
+      })
+      done();
+    })
+  });
   test('Probando con un directorio que contiene elementos', (done) => {
     const api = flowmd.convertRelativeToAbsolutePath('../__test__/');
     mdlinks(api).then((links) => {
@@ -159,7 +170,9 @@ describe('PROBANDO FUNCIÓN MD LINKS', () => {
   test('Realizando petición a http 400', (done) => {
     mockAxios.get.mockImplementation(() =>
       Promise.reject({
-        response : { status: 400 }
+        response: {
+          status: 400
+        }
       })
     );
 
@@ -183,7 +196,9 @@ describe('PROBANDO FUNCIÓN MD LINKS', () => {
   test('Realizando petición a http 500', (done) => {
     mockAxios.get.mockImplementation(() =>
       Promise.reject({
-        response : { status: 500 }
+        response: {
+          status: 500
+        }
       })
     );
 
