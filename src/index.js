@@ -21,8 +21,8 @@ const mdlinks = (elemPath, options = {
               linkFound.links.forEach((link) => {
                 const str = link.split('](');
                 arrMdFileLinks.push({
-                  href: str[1].slice(0, -1),
-                  text: str[0].slice(1, 50),
+                  href: str[1].trim().slice(0, -1),
+                  text: str[0].trim().slice(1, 50),
                   file: linkFound.path
                 })
               });

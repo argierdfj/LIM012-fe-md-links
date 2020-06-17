@@ -55,7 +55,7 @@ const flowmd = {
           const contentFile = fileSystem.readFileSync(mdFilePath, {
             encoding: 'utf8'
           })
-          const regExpLinks = new RegExp('\\[.+\\]\\(.+\\)+', 'g');
+          const regExpLinks = new RegExp('[^!]\\[.+\\]\\(.+\\)+', 'g');
           arrLinks.push({
             path: mdFilePath,
             links: contentFile.match(regExpLinks)
