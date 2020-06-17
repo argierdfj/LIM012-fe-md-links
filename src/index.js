@@ -1,17 +1,17 @@
-const fn = require('./flowmd.js');
+const method = require('./flowmd.js');
 const axios = require('axios');
 
 const mdlinks = (elemPath, options = {
     validate: false
   }) =>
   new Promise((resolve, reject) => {
-    const absPath = fn.convertRelativeToAbsolutePath(elemPath);
+    const absPath = method.convertRelativeToAbsolutePath(elemPath);
 
-    if (fn.isValidPath(absPath)) {
-      const arrMdFilePath = fn.getPathMdFile(absPath);
+    if (method.isValidPath(absPath)) {
+      const arrMdFilePath = method.getPathMdFile(absPath);
 
       if (arrMdFilePath.length) {
-        const arrLinksFound = fn.findLinks(arrMdFilePath);
+        const arrLinksFound = method.findLinks(arrMdFilePath);
 
         const arrMdFileLinks = [];
 
@@ -29,7 +29,7 @@ const mdlinks = (elemPath, options = {
             }
           });
         }
-
+        
         if (arrMdFileLinks.length) {
           if (options.validate) {
             const arrLinkStatus = [];
