@@ -56,13 +56,17 @@ const flowmd = {
             encoding: 'utf8'
           })
           const regExpLinks = new RegExp('[^!]\\[.+\\]\\(.+\\)+', 'g');
-          arrLinks.push({
-            path: mdFilePath,
-            links: contentFile.match(regExpLinks)
-          });
+          const fileLinks = contentFile.match(regExpLinks);
+          if (fileLinks) {
+            arrLinks.push({
+              path: mdFilePath,
+              links: fileLinks.map((str) => str.trim())
+            });
+          }
         });
       }
 
+      console.log(arrLinks.flat());
       return arrLinks.flat();
     }
     return [];
