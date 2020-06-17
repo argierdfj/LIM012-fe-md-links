@@ -65,8 +65,6 @@ const flowmd = {
           }
         });
       }
-
-      console.log(arrLinks.flat());
       return arrLinks.flat();
     }
     return [];
