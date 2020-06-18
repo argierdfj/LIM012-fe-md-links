@@ -4,7 +4,7 @@ const fileSystem = require('fs');
 const flowmd = {
   convertRelativeToAbsolutePath: (elemPath) => {
     if (typeof elemPath === 'string') {
-      return path.resolve(__dirname, elemPath);
+      return path.resolve(elemPath);
     }
     return '';
   },
@@ -23,7 +23,7 @@ const flowmd = {
     return false;
   },
   getPathMdFile: (elemPath, arrMdFilesPath = []) => {
-    if (typeof elemPath === 'string') {
+    if (typeof elemPath === 'string' && elemPath !== '') {
       const extElem = path.extname(elemPath);
       const elemName = path.basename(elemPath);
       const directory = fileSystem.statSync(elemPath);
@@ -43,6 +43,8 @@ const flowmd = {
           arrMdFilesPath.push(elemPath)
         }
       }
+    } else {
+       return ''
     }
     return arrMdFilesPath;
   },
