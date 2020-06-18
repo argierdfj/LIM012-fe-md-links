@@ -1,3 +1,4 @@
+## FLOWMD.JS
 1. Almacené en unas constantes las librerías que utilicé.
 PATH y FS.
 
@@ -44,7 +45,8 @@ PATH y FS.
     * links: para almacenar los links encontrados en ese archivo usando el método ```match()``` para obtener todas las ocurrencias de mi expresión regular dentro del contenido del archivo md que es un string.
   - La fn retorna en el arrLinks un arr de objetos con las propiedades path y links, aplicándole el método de arr flat para que se cree un nuevo arr único de objetos.
 
-7. Fn MDLINKS
+## INDEX.JS
+1. Fn MDLINKS
   - Recibe como parámetro la ruta del elemento y la variable options que es un objeto con valor Booleano, ésto por defecto será False, retorna una promesa.
   - Creo una nueva promesa con los parámetros resolve y reject.
   - Almaceno en la constante absPath la llamada al método de mi obj flowmd ```convertRelativeToAbsolutePath()```.
@@ -56,7 +58,7 @@ PATH y FS.
   - Si tiene elementos, alamceno en arrLinksFound la llamada al método ```findLinks()```.
   - Creo el arrMdFileLinks vacío.
   - Valido con una condicional si el arrLinksFound contiene elementos.
-  - Si contiene elementos, recorro cada uno de ellos buscando la propiedad links. (paso 6)
+  - Si contiene elementos, recorro cada uno de ellos buscando la propiedad links. [path y links].
   - Valido en una condicional si existe la propiedad links.
   - Si la contiene, recorro cada elemento de links para separar en nuevas cadenas el texto del link y el enlace.
   - Almaceno el una constante el contenido de la propiedad link aplicándole el método ```split('](')``` para crear un arr con dos cadenas una con el texto y otra con el link.
@@ -66,22 +68,42 @@ PATH y FS.
     * Le añado la clave file y le asigno la ruta del link donde se encontró el archivo que contenía el enlace accediendo a la propiedad ```path``` del linkFound.
   - Valido con una condicional si el arr de links en archivos .md tiene elementos.
   - Si no tiene elementos, llamo a la fn ```reject(new Error)``` para mostrar el mensaje de que no se encontraron links.
+
+2. Validate de la fn mdlinks.
+  - Valido si arrMdFileLinks contiene elementos (arr deobj con propiedades {url,texto,ruta}) .
   - Si contiene elementos, valido en otra condicional si validate es true.
   - Si no es true, llamo a la fn ```resolve()``` para que solo me retorne el arr de links en archivos .md "arrMdFileLinks".
   - Si validate es true, creo el arrLinkStatus vacío.
-  - Recorro cada elemento del arr de links en archivos .md.
+  - Recorro cada elemento del arr de links en archivos .md (obj).
   - Y en cada elemento recorrido al arrLinkStatus le aplico el método ```push()```.
     * Dentro del método push aplico el método get de axios# para hacer la petición al http accediendo a la propiedad href del objeto del elemento del arr actual, que sería la url que se va a evaluar.
-    * Aplico el método then, y dentro la fn anónima con parámetro data que representa todo el objeto que me trae la consulta a la URL con axios.
-    * En el then retorno un objeto con el operador ... para anidarle al elem del arr mdFileLinks las claves status y msg.
+    * Axios retorna una promesa por lo tanto aplico el método then, y dentro la fn anónima con parámetro data que representa todo el objeto que me trae la consulta a la URL con axios.
+    * En el then retorno un objeto con el operador de propagación ... mdfilelinks para anidarle al obj del arr mdFileLinks las claves status y msg.
     * Al valor de status le asigno la propiedad status del objeto data (objeto que trae la data de la petición al http).
     * Al valor de msg le asigno el string 'OK', porque la solicitud respondió correctamente con un código de estatus entre 200 y 300.
-    * Aplico el método catch, y dentro la fn anónima con parámetro err, que representa la respuesta fallida de la solicitud http.
-    * En el catch retorno un objeto con el operador ... para anidarle al elem del arr mdFileLinks las claves status y msg.
-    * Al valor de status le asigno la propiedad response de status del objeto err (objeto que trae la respuesta de la petición al http).
-    * Al valor de msg le asigno el string 'FAIL', porque la solicitud no respondió correctamente con un código de estatus entre 400 y 500.
+    * Para los casos de error aplico el método catch, y dentro la fn anónima con parámetro err, que representa la respuesta fallida de la solicitud http.
+    * En el catch retorno un objeto con el operador de propagación ... mdfilelinks para anidarle al obj del arr mdFileLinks las claves status y msg.
+    * Evalúo con un ternario si el obj err contiene la propiedad response, en ese caso Al valor de status le asigno la propiedad response de status del objeto err (objeto que trae la respuesta de la petición al http), en caso contrario le asigno un nro por defecto (999).
+    * Al valor de msg le asigno el string 'FAIL', porque la solicitud respondió con un código de estatus entre 400 y 500.
 
-    #NOTA: AXIOS regresa una promesa y garantiza el funcionamiento en cualquier navegador,detecta en qué navegador está trabajando y se adapta al XMLHttpRequest o fetch. Es de grna utilidad en proyectos grandes porque garantiza que siempre va a retornar una promesa sea lo que sea donde estemos trabajando.
+    #NOTA: AXIOS regresa una promesa y garantiza el funcionamiento en cualquier navegador,detecta en qué navegador está trabajando y se adapta al XMLHttpRequest o fetch. Es de gran utilidad en proyectos grandes porque garantiza que siempre va a retornar una promesa sea lo que sea donde estemos trabajando.
+
+## CLI
+1. Lo primero es añadir la instrucción especial de shell en la parte superior de nuestro archivo js para decirle a los sistemas unix que el intérprete del archivo js busque el node ejecutable instalado localmente.
+
+2. Desestructuro el array de process.argv que en la posición 0 tiene el ejecutable de node, y en la posición 1 tiene el CLI, y en la posición 2 en adelante los argumentos que recibirá el CLI, ignorando las primeras posiciones.
+
+3. Creo mi función cli qu recibe los argumentos que el usuario le pase en la terminal (ruta, stats y/o validate).
+  - Creo la constante ruta del elemento y las variables stats y validate con valor booleano por defecto false.
+  - Creo la condicional para validar si el arr de argumetos contiene --stats y lo mismo para validar si contine --validate y cambiar las variables stats y validate a true respectivamente.
+  - Creo la constante options que contiene el objeto validate.
+  - Luego llamo a la función mdlinks recibiendo sus respectivos parámetros (ruta y options).
+  - Consumo la promesa que creé con el método then, en su función anónima recibe como parámetro links.
+  - Con una condicional valido si se recibió el argumento stats para mostrarle al usuario en la consola el TOTAL de links encontrados.
+  - Para mostrar los links únicos en caso de que haya alguno repetido, creo el arr uniqueLinks vacío y con el bucle for recorro cada link y en cada recorrido añado al arr uniqueLinks la propiedad href convertida a string con el JSON.stringify para realizar la comparación de cada link, puesto que los objetos aunque sean exactamente iguales no se pueden comparar entre ellos.
+  - Luego consoleo los links UNIQUES para mostrarlos al usuario, convierto el arr uniqueLinks con el ...New Set en un arr con elementos únicos y con la propiedad length muestro la cantidad.
+  - Añado al condicional para la ejecución del stats junto con el validate.
+  - Creo la constante brokenLinks para filtrar los links que en su propiedad msg su valor sea FAIL y luego consoleo la longitud de los links que cumplieron la condición. 
 
 # OBJETIVOS DE APRENDIZAJE
 
