@@ -143,6 +143,7 @@ describe('PROBANDO FUNCIÓN MD LINKS', () => {
     })
   });
 
+  // MOCKS
   test('Realizando petición a http 200', (done) => {
     mockAxios.get.mockImplementation(() =>
       Promise.resolve({

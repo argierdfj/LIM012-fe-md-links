@@ -91,9 +91,13 @@ PATH y FS.
 ## CLI
 1. Lo primero es añadir la instrucción especial de shell en la parte superior de nuestro archivo js para decirle a los sistemas unix que el intérprete del archivo js busque el node ejecutable instalado localmente.
 
-2. Desestructuro el array de process.argv que en la posición 0 tiene el ejecutable de node, y en la posición 1 tiene el CLI, y en la posición 2 en adelante los argumentos que recibirá el CLI, ignorando las primeras posiciones.
+2. Luego para asignarle el nombre del comando con el que vamos a ejecutar el CLI, para el script de la línea de comandos local, le añadimos un nuevo campo "bin": {"mdlinks": ./cli.js} en el package.JSON.
 
-3. Creo mi función cli qu recibe los argumentos que el usuario le pase en la terminal (ruta, stats y/o validate).
+3. Para vincular el comando para el desarrollo utilizamos el comando ```npm link```, que entre otras cosas, nos permite 'enlazar de manera simbólica una carpeta de paquete' localmente, y para nuestras necesidades, instalará localmente cualquier comando listado en el bincampo de nuestro package.json. En otras palabras, npm linkes como un simulador de instalación del paquete NodeJS.
+
+4. Desestructuro el array de process.argv que en la posición 0 tiene el ejecutable de node, y en la posición 1 tiene el CLI, y en la posición 2 en adelante los argumentos que recibirá el CLI, ignorando las primeras posiciones.
+
+5. Creo mi función cli qu recibe los argumentos que el usuario le pase en la terminal (ruta, stats y/o validate).
   - Creo la constante ruta del elemento y las variables stats y validate con valor booleano por defecto false.
   - Creo la condicional para validar si el arr de argumetos contiene --stats y lo mismo para validar si contine --validate y cambiar las variables stats y validate a true respectivamente.
   - Creo la constante options que contiene el objeto validate.
@@ -103,7 +107,30 @@ PATH y FS.
   - Para mostrar los links únicos en caso de que haya alguno repetido, creo el arr uniqueLinks vacío y con el bucle for recorro cada link y en cada recorrido añado al arr uniqueLinks la propiedad href convertida a string con el JSON.stringify para realizar la comparación de cada link, puesto que los objetos aunque sean exactamente iguales no se pueden comparar entre ellos.
   - Luego consoleo los links UNIQUES para mostrarlos al usuario, convierto el arr uniqueLinks con el ...New Set en un arr con elementos únicos y con la propiedad length muestro la cantidad.
   - Añado al condicional para la ejecución del stats junto con el validate.
-  - Creo la constante brokenLinks para filtrar los links que en su propiedad msg su valor sea FAIL y luego consoleo la longitud de los links que cumplieron la condición. 
+  - Creo la constante brokenLinks para filtrar los links que en su propiedad msg su valor sea FAIL y luego consoleo la longitud de los links que cumplieron la condición.
+  - En un else if añado la condicional para la opción del validate sola.
+  - Alamceno en una constante la ruta del directorio de trabajo actual.
+  - luego recorro cada link (obj del arr mdlinks) para cambiarles el formato de objeot a string con colores.
+    * Para mostrar la ruta de forma más corta con el método replace reemplazo la ruta del directorio de trabajo actual por un punto.
+    * Para darles los colores al status y el msg utilicé un ternario donde defino que si el status o el msg es exactamente igual a OK se muestren de color verde y si no que se muestren de color rojo.
+  - En el else se hará el output por defecto en caso de que se reciba como argumento solo la ruta.
+  - Nuevamente alamceno en una constante la ruta del directorio de trabajo actual.
+  - Luego recorro cada elemento del arr mdlinks (objs), recorto la ruta con el método replace y le doy sus respectivos colores para mostrarlo en la consola.
+
+Process.cwd() devuelve el directorio de trabajo actual, es decir, el directorio desde el que invocó el comando node.
+__dirname devuelve el nombre de directorio del directorio que contiene el archivo de código fuente de JavaScript.
+
+## MOCKS MANUALES DE AXIOS
+
+1. En src creo una carpeta __mocks__ y dentro un archivo js con el nombre de la librería que voy a simular, en este caso axios.
+
+2. En ese archivo exporto un objeto con la propiedad get que es la que estoy utilizando para hacer la petición al HTTP y como valor le asigno jest.fn para crear una función falsa o mockeada.
+
+3. En mi archivo de tests importo la librería axios y mi archivo axios.js lo suplantará en los tests.
+
+4. En la prueba llamo a la fn axios y a su propiedad get y para simular el mock utilizo el método mockImplementation() para sobreescribir la fn del archivo axios.js, pasándole como parámetro una función anónima con el Promise.resolve o .reject dependiendo de la prueba, y dentro el objeto su respectiva respuesta de la solicitud al HTTP.
+
+5. Luego pruebo la fn mdlinks con la ruta y el vlaidate, en el método then recibo el parámetro links (arr de obj) y en expect defino la respuesta que debería dar el test.
 
 # OBJETIVOS DE APRENDIZAJE
 
