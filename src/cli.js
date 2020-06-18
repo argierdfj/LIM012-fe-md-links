@@ -30,11 +30,11 @@ const cli = (args) => {
         console.log(`${chalk.magenta('Total:')} ${links.length}`);
 
         //* Para contar solo los links únicos.
-        const newLinks = [];
+        const uniqueLinks = [];
         for (let i = 0; i < links.length; i++) {
-          newLinks.push(JSON.stringify(links[i]));
+          uniqueLinks.push(JSON.stringify(links[i]));
         }
-        console.log(chalk.cyan('Unique:') + [...new Set(newLinks)].length);
+        console.log(chalk.cyan('Unique:') + [...new Set(uniqueLinks)].length);
 
         //* Para contar la cantidad de links rotos
         if (validate) {
