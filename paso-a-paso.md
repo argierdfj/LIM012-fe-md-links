@@ -160,7 +160,7 @@ __dirname devuelve el nombre de directorio del directorio que contiene el archiv
      * [Import](https://developer.mozilla.org/es/docs/Web/JavaScript/Referencia/Sentencias/import): Esta sentencia se utiliza para importar fn que han sido exportadas desde un módulo externo.
 
 - [x] [Recursión](https://platzi.com/clases/1099-fundamentos-javascript-2017/6607-funciones-recursivas/): Una función que se llama o se ejecuta a sí misma (secuencia de fibonacci) hasta que sucede una condición base.
-     *[ Memoización](https://platzi.com/clases/1099-fundamentos-javascript-2017/6608-memoizacion/): Es una técnica de optimización utilizada principalmente para acelerar los programas informáticos almacenando los resultados de llamadas fn costosas y devolviendo el resultado almacenado en cahé cuando vuelven a ocurrir las mismas entradas.
+     * [ Memoización](https://platzi.com/clases/1099-fundamentos-javascript-2017/6608-memoizacion/): Es una técnica de optimización utilizada principalmente para acelerar los programas informáticos almacenando los resultados de llamadas fn costosas y devolviendo el resultado almacenado en cahé cuando vuelven a ocurrir las mismas entradas.
       Guardar termporalmente valores que ya han sido calculados anteriormente.
 
 - [x] [Sistema de archivos](https://platzi.com/clases/1759-fundamentos-node/25198-file-system/): El módulo de file system permite acceder a archivos de nuestro sistema leerlos, escribirlos, modificarlos, cambiarles el nombre entre otras cosas.
