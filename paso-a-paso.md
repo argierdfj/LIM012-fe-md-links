@@ -139,7 +139,7 @@ __dirname devuelve el nombre de directorio del directorio que contiene el archiv
     JavaScript cuando ejecuta código lo hace de manera síncrona, pero una forma que tiene de ejecutar código asíncrono es con las funciones llamadas “Callbacks”.
     Éstas se ejecutan y nos devuelven el proceso, generalmente después de algún evento de tiempo, al completarse un request o al terminar de leer un archivo.
 
-- [x] (Consumo de promesas)[https://platzi.com/clases/1099-fundamentos-javascript-2017/6605-promesas/]
+- [x] [Consumo de promesas](https://platzi.com/clases/1099-fundamentos-javascript-2017/6605-promesas/)
     Para obtener el valor de la resolucion de la promesa se utiliza el método then que tiene como parametro una función que a su vez tendrá como parametro el valor que esperamos obtener.
     Si sucede algun error en la promesa y se rechaza utilizamos el metodo catch que tambien recibe como parámetro una función que va a tener como parámetro el error que arrojó la promesa.
 
