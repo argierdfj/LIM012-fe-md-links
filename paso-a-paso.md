@@ -93,7 +93,7 @@ PATH y FS.
 
 2. Luego para asignarle el nombre del comando con el que vamos a ejecutar el CLI, para el script de la línea de comandos local, le añadimos un nuevo campo "bin": {"mdlinks": ./cli.js} en el package.JSON.
 
-3. Para vincular el comando para el desarrollo utilizamos el comando ```npm link```, que entre otras cosas, nos permite 'enlazar de manera simbólica una carpeta de paquete' localmente, y para nuestras necesidades, instalará localmente cualquier comando listado en el bincampo de nuestro package.json. En otras palabras, npm linkes como un simulador de instalación del paquete NodeJS.
+3. Para vincular el comando para el desarrollo utilizamos el comando ```npm link```, que entre otras cosas, nos permite 'enlazar de manera simbólica una carpeta de paquete' localmente, y para nuestras necesidades, instalará localmente cualquier comando listado en el campo bin de nuestro package.json. En otras palabras, npm link es como un simulador de instalación del paquete NodeJS.
 
 4. Desestructuro el array de process.argv que en la posición 0 tiene el ejecutable de node, y en la posición 1 tiene el CLI, y en la posición 2 en adelante los argumentos que recibirá el CLI, ignorando las primeras posiciones.
 
@@ -134,16 +134,16 @@ __dirname devuelve el nombre de directorio del directorio que contiene el archiv
 
 # OBJETIVOS DE APRENDIZAJE
 
-- [x] Uso de callbacks
+- [x] [Uso de callbacks](https://platzi.com/clases/1099-fundamentos-javascript-2017/6603-los-callbacks-de-javascript/)
     Se utilizan para manejar la asincronía en el lenguaje.
     JavaScript cuando ejecuta código lo hace de manera síncrona, pero una forma que tiene de ejecutar código asíncrono es con las funciones llamadas “Callbacks”.
     Éstas se ejecutan y nos devuelven el proceso, generalmente después de algún evento de tiempo, al completarse un request o al terminar de leer un archivo.
 
-- [x] Consumo de promesas
+- [x] (Consumo de promesas)[https://platzi.com/clases/1099-fundamentos-javascript-2017/6605-promesas/]
     Para obtener el valor de la resolucion de la promesa se utiliza el método then que tiene como parametro una función que a su vez tendrá como parametro el valor que esperamos obtener.
     Si sucede algun error en la promesa y se rechaza utilizamos el metodo catch que tambien recibe como parámetro una función que va a tener como parámetro el error que arrojó la promesa.
 
-- [x] Creación de promesas
+- [x] [Creación de promesas](https://platzi.com/clases/1099-fundamentos-javascript-2017/6605-promesas/)
     Son objetos y están asociadas a las tareas asincronicas.
     Para crear las promesas se usa la clase Promise. El constructor de Promise recibe un sólo argumento, un callback con dos parámetros, resolve y reject. resolve es la función a ejecutar cuando se resuelve y reject cuando se rechaza.
     Al crear una promesa va a estar en estado pendiente.
@@ -153,4 +153,54 @@ __dirname devuelve el nombre de directorio del directorio que contiene el archiv
       * Fullfiled: Completada exitosamente.
       * Setted: completa, rechazada.
 
+- [x] [Módulos de JS](https://developer.mozilla.org/es/docs/JavaScript_code_modules/Using#:~:text=Un%20m%C3%B3dulo%20de%20c%C3%B3digo%20JavaScript,XPCOM%20de%20JavaScript%2C%20usando%20Components.)
+    Los módulos de código JavaScript son un concepto de código introducido en firefox 3. Y pueden ser usados para compartir código entre scopes. El módulo es cargado dentro de un scope de js específico usando components.utils.import.
+     * [Export](https://developer.mozilla.org/es/docs/Web/JavaScript/Referencia/Sentencias/export): Esta declaración se utiliza para exportar funciones, obj, o tipos de datos primitivos para que puedan ser usados por otros programas con la sentencia import.
+     Existen dos tipos de exportación, nombrada y por defecto. Se pueden tener varias exportaciones nombradas por módulo pero solo una exportación por defecto.
+     * [Import](https://developer.mozilla.org/es/docs/Web/JavaScript/Referencia/Sentencias/import): Esta sentencia se utiliza para importar fn que han sido exportadas desde un módulo externo.
 
+- [x] [Recursión](https://platzi.com/clases/1099-fundamentos-javascript-2017/6607-funciones-recursivas/): Una función que se llama o se ejecuta a sí misma (secuencia de fibonacci) hasta que sucede una condición base.
+     *[ Memoización](https://platzi.com/clases/1099-fundamentos-javascript-2017/6608-memoizacion/): Es una técnica de optimización utilizada principalmente para acelerar los programas informáticos almacenando los resultados de llamadas fn costosas y devolviendo el resultado almacenado en cahé cuando vuelven a ocurrir las mismas entradas.
+      Guardar termporalmente valores que ya han sido calculados anteriormente.
+
+- [x] [Sistema de archivos](https://platzi.com/clases/1759-fundamentos-node/25198-file-system/): El módulo de file system permite acceder a archivos de nuestro sistema leerlos, escribirlos, modificarlos, cambiarles el nombre entre otras cosas.
+
+- [x] [Package.JSON](https://platzi.com/clases/1763-npm/25051-iniciar-un-proyecto/): Es el archivo de configuración de un proyecto de node. Donde tenemos una configuración establecida, una descripción del proyecto, y ciertos valores necesarios. Lo creamos haciendo npm init -y para que se llene de forma automática con las configuraciones esenciales o npm init para ir llenando manualmente esas configuraciones.
+
+- [x] Instalar y usar modules: npm install.
+
+- [x] [npm Scripts](https://docs.npmjs.com/misc/scripts): npm admite la propiedad "scripts" del archivo package.JSON para varios scripts. Hasta ahora he utilizado npm test, npm start.
+
+- [x] [CLI](https://es.wikipedia.org/wiki/Interfaz_de_l%C3%ADnea_de_comandos) (interfáz de línea de comandos): Es un método que permite a los usuarios dar instrucciopnes a algún programa informático por medio de una línea de texto simple. Es un programa que recibe nuestras órdenes de forma relativamente cómoda y las traduce a un lenguaje que la computadora pueda entender y en conjunto con el sistema operativo ejecuta esas instrucciones y muestra el resultado, todo esto sucede en un entorno que se conoce como interfáz de texto.
+  Los comandos consisten en el nombre del programa espacio, los parámetros, espacio los modificadores. Los modificadores alteran lo que el programa va a hacer, los parámetros son información adicional para la ejecución del programa.
+  comando -flag1 -flag2 arg1 arg2 El guión medio para indicar los flags o modificadores.
+
+- [x] [Testing](https://platzi.com/clases/1357-js-jest-2019/13813-que-son-las-pruebas-unitarias/):
+  * Pruebas unitarias:  Las pruebas unitarias lo que hacen es tomar todos tus proyectos o esos bloques de código y descomponerlo en pequeñas partes que vamos a probar. Así, todo lo que vamos pasando sabemos que esta funcionando correctamente y que no hay ningún inconveniente o bug.
+
+Las pruebas unitarias comprueban lo que son casos estándares (suposición explícita) es decir, no son perfectas. Las características de las pruebas unitarias son:
+
+Automatizable: Deben correr sin ningún proceso manual.
+Total Cobertura: Debemos de pasar por cada bloque escrito.
+Reutilizables: Podemos usarlas para probar otros bloques.
+Independientes: No pueden depender de otra prueba para funcionar.
+Rápidas de crear: TIenen que ser algo conciso que prueben algo muy particular.
+Ventajas de las pruebas unitarias:
+
+Proporciona un trabajo ágil.
+Calidad del código.
+Detectar errores rapido.
+Facilita los cambios y favorece la integración.
+Proporciona información.
+Reduce el coste.
+
+- [x] [Testeo asíncrono](https://doc.ebichu.cc/jest/docs/es-ES/asynchronous.html): Si tenemos código que se ejecuta de forma asincrónica, Jest debe saber cuando ha terminado el código que se está probando, antes de que puede pasar a otro test.
+
+- [ ] [Librerías de mock](https://folderit.net/es/blog/frameworks-de-mock-de-objetos-para-pruebas-unitarias-es/): Son herramientas que permiten simular una funcionalidad o sobrescribir un comportamiento existente cuando utilizámos métodos que interactúan con componentes de terceros o que requieren de la existencia de cierta información que no se dispone en la prueba.
+
+- [ ] [Mocks manuales](https://jestjs.io/docs/es-ES/manual-mocks): Las simulaciones mock manuales son usadas para sustituir funcionalidad con datos falsos. Por ejemplo, en lugar de acceder a un recurso remoto como un sitio web o una base de datos, puede que se desee crear una simulación manual que permita usar datos falsos. Esto asegura que las pruebas serán rápidas y estables. Las simulaciones mock manuales se definen escribiendo un modulo en el subdirectorio __mocks__ el cual se debe encontrar adyacente al módulo.
+
+
+
+
+     los branchs en los tests son las ramificaciones del código, por ejemplo los ifs.
