@@ -110,10 +110,10 @@ MIT ©
 
 ### Testing
 - [x] Testeo de tus funciones
-- [ ] Testeo asíncrono
+- [x] Testeo asíncrono
 - [ ] Uso de librerias de Mock
 - [ ] Mocks manuales
-- [ ] Testeo para multiples Sistemas Operativos
+- [x] Testeo para multiples Sistemas Operativos
 
 ### Git y Github
 - [x] Organización en Github
