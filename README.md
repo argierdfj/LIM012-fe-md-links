@@ -82,9 +82,7 @@ $ mdlinks ./path --validate --stats
 MIT ©
 
 
-## Objetivos de aprendizaje
-
-### Pendientes.
+## Objetivos de aprendizaje pendientes.
 
 ### Organización en Github
 
@@ -93,7 +91,7 @@ MIT ©
 * [x] Labels
 * [x] Milestones
 
-### Del proyecto.
+## Objetivos de aprendizaje del proyecto.
 
 ### Javascript
 - [x] Uso de callbacks
