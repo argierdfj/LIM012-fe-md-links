@@ -26,6 +26,7 @@
   },
   "homepage": "https://github.com/argierdfj/LIM012-fe-md-links#readme",
   "devDependencies": {
+    "@babel/plugin-transform-modules-commonjs": "^7.10.1",
     "eslint": "^7.1.0",
     "eslint-config-airbnb-base": "^14.1.0",
     "eslint-plugin-jest": "^23.13.1",
