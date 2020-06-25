@@ -72,7 +72,7 @@ describe('OBTENIENDO RUTAS DE ARCHIVOS MD', () => {
   });
   test('Probando con un directorio con elementos', () => {
     const absPath = convertRelativeToAbsolutePath('./__test__');
-    expect(getPathMdFile(absPath)).toEqual([path.resolve('__test__/test/test.md')]);
+    expect(getPathMdFile(absPath)[0]).toBe(path.resolve('./__test__/test/test-1.md'));
   });
   test('Probando con un archivo md', () => {
     const absPath = convertRelativeToAbsolutePath('./paso-a-paso.md');
@@ -109,7 +109,7 @@ describe('ENCONTRANDO LINKS EN ARCHIVOS MD', () => {
     expect(findLinks([])).toEqual([]);
   });
   test('Probando con un archivo md que no contiene enlaces', () => {
-    expect(findLinks([path.resolve('paso-a-paso.md')])).toEqual([]);
+    expect(findLinks([path.resolve('./__test__/test/test-1.md')])).toEqual([]);
   });
 });
 
@@ -162,7 +162,7 @@ describe('PROBANDO FUNCIÓN MD LINKS', () => {
     })
   });
   test('Probando con un archivo md que no continen links', (done) => {
-    const api = convertRelativeToAbsolutePath('./paso-a-paso.md');
+    const api = convertRelativeToAbsolutePath('./__test__/test/test-1.md');
     mdlinks(api).catch((err) => {
       expect(err).toEqual(new Error('No se encontraron links'));
       done();
