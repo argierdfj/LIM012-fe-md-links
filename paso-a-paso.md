@@ -167,6 +167,12 @@ __dirname devuelve el nombre de directorio del directorio que contiene el archiv
 
 - [x] [Package.JSON](https://platzi.com/clases/1763-npm/25051-iniciar-un-proyecto/): Es el archivo de configuración de un proyecto de node. Donde tenemos una configuración establecida, una descripción del proyecto, y ciertos valores necesarios. Lo creamos haciendo npm init -y para que se llene de forma automática con las configuraciones esenciales o npm init para ir llenando manualmente esas configuraciones.
 
+- [x] [Diferencia entre dependecias y dependencias de desarrollo](https://platzi.com/clases/1542-pruebas-unitarias/18783-configurando-el-proyecto-jasmine-utilizando-npm/): La diferencia entre dependencies (dependencias) y devDependencies (dependencias de desarrollo) es que las dependencias normales las instalamos siempre, en desarrollo o en producción. En cambio, las devDependencies son módulos que solo se vamos a necesitar en la etapa de desarrollo, no en producción.
+
+Algunos buenos ejemplos de dependencies que se requerirían en tiempo de ejecución son, por ejemplo, React, Redux, Express y Axios.
+
+Algunos buenos ejemplos de cuándo instalar devDependencies serían Nodemon, Babel, ESLint y marcos de prueba como Chai, Mocha, Enzyme, entre otros.
+
 - [x] Instalar y usar modules: npm install.
 
 - [x] [npm Scripts](https://docs.npmjs.com/misc/scripts): npm admite la propiedad "scripts" del archivo package.JSON para varios scripts. Hasta ahora he utilizado npm test, npm start.
